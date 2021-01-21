@@ -50,6 +50,12 @@ class MyLinkedList
     :rtype: Void
 =end
   def add_at_tail(val)
+    if @head == nil
+      add_at_head(val)
+      
+      return
+    end
+
     node = @head
 
     until node.next == nil do
@@ -67,6 +73,20 @@ class MyLinkedList
     :rtype: Void
 =end
   def add_at_index(index, val)
+    return if index > size()
+      
+    if !@head || index == 0
+      add_at_head(val)
+
+      return
+    end
+
+    if index == size()
+      add_at_tail(val)
+
+      return
+    end
+
     n = 0
     node = @head 
 
@@ -90,6 +110,8 @@ class MyLinkedList
     :rtype: Void
 =end
   def delete_at_index(index)
+    return if index > (size() - 1)
+
     if index == 0
       @head = @head.next
 
@@ -111,6 +133,21 @@ class MyLinkedList
     next_node_after_del_node = node_to_delete.next
     node.next = next_node_after_del_node
   end
+
+  def size()
+    return 0 if !@head
+
+    n = 1
+    node = @head
+    
+    until !node.next do
+      n += 1
+      node = node.next 
+    end
+
+    return n
+  end
+
 end
 
 class Node
@@ -122,17 +159,3 @@ class Node
       @next = next_node
   end
 end
-
-# obj = MyLinkedList.new # {}
-# obj.add_at_head(1) # {1, x}
-# obj.add_at_head(0) # {0, 1, x}
-# obj.add_at_tail(3) # {0, 1, 3, x}
-# obj.add_at_index(2, 2) # {0, 1, 2, 3, x}
-# obj.add_at_index(2, 5) # {0, 1, 5, 2, 3, x}
-# obj.delete_at_index(2) # {0, 1, 2, 3, x}
-
-# @todo: fix this bug
-obj = MyLinkedList.new # {}
-obj.add_at_index(0, 10)
-obj.add_at_index(0, 20)
-obj.add_at_index(1, 30)
