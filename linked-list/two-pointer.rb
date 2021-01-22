@@ -47,3 +47,39 @@ def hasCycle(head)
 
   return isCircular
 end
+
+# @param {ListNode} head
+# @return {Boolean}
+def hasCycleUsingFloyCycleFinding(head)
+  return false if !head || !head.next
+
+  slow = head
+  fast = head.next
+
+  while slow != fast do
+    return false if !fast or !fast.next
+
+    slow = slow.next
+    fast = fast.next.next
+  end
+
+  return true
+end
+
+# @param {ListNode} head
+# @return {Boolean}
+def hasCycleHashMap(head)
+  visited_node = Set.new
+
+  node = head
+
+  until !node do
+    return true if visited_node.include?(node)
+
+    visited_node << node
+
+    node = node.next
+  end
+
+  return false
+end
