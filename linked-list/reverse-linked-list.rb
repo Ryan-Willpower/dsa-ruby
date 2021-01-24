@@ -1,41 +1,30 @@
-class ListNode
-  attr_reader :val
-  attr_accessor :next
-
-  def initialize(val, next_node = nil)
-      @val = val
-      @next = next_node
-  end
-end
+# Definition for singly-linked list.
+# class ListNode
+#     attr_accessor :val, :next
+#     def initialize(val = 0, _next = nil)
+#         @val = val
+#         @next = _next
+#     end
+# end
 
 # @param {ListNode} head
 # @return {ListNode}
 def reverse_list(head)
-  # 23 -> 6 -> 15 -> nil
-  # 6 -> 23 -> 15 -> nil
-  # 15 -> 6 -> 23 -> nil
+  return head if !head or !head.next
 
-  # first_node: 6 -> 15 -> nil
-  first_node = head.next 
+  prev = nil
+  current = head
+  next_node = head.next
 
-  # head: 23 -> 15 -> nil
-  head.next = first_node.next
+  until !next_node do
+    current.next = prev
 
-  # first_node: 6 -> 23 -> 15 -> nil
-  first_node.next = head
+    prev = current
+    current = next_node
+    next_node = current.next
+  end
 
-  # second_node: 15 -> nil
-  second_node = first_node.next.next
+  current.next = prev
 
-  # first_node: 6 -> 23 -> nil
-  first_node.next.next = second_node.next
-
-  # second_node: 15 -> 6 -> 23 -> nil
-  second_node.next = first_node
-
-  p second_node
+  return current
 end
-
-head = ListNode.new(23, ListNode.new(6, ListNode.new(15)))
-
-reverse_list(head)
