@@ -8,6 +8,12 @@ class TreeNode
   end
 end
 
+# 1) Create an empty stack nodeStack and push root node to stack. 
+# 2) Do following while nodeStack is not empty. 
+# ….a) Pop an item from stack and print it. 
+# ….b) Push right child of popped item to stack 
+# ….c) Push left child of popped item to stack
+
 # @param {TreeNode} root
 # @return {Integer[]}
 def preorder_traversal(root)
